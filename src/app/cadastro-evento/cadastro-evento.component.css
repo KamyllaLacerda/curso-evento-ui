@@ -1,0 +1,21 @@
+.titulo {
+    font-size: 25px;
+    padding: 10px;
+    color: #000
+}
+
+.cadastroEvento {
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    padding: 3%;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.botao {
+    margin-top: 40px;
+}
+
+.espaco {
+    padding: 5px;
+}

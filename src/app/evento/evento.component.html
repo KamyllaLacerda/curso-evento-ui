@@ -1,0 +1,186 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<div class="container">
+
+
+
+    <div class="evento shadow-sm espacoCard">
+        <h3>{{ evento.titulo }}</h3>
+        <div class="row espaçoTextoCima">
+            <div class="col-12 col-xl-3">
+                <h6 class="subtitle text-muted">Data de início: {{ evento.dataInicio | date: 'dd/MM/yyyy' }}</h6>
+            </div>
+            <div class="col-12  col-xl-3">
+                <h6 class="subtitle text-muted">Hora de início: {{ evento.horaInicio }}</h6>
+            </div>
+            <div class="col-12  col-xl-3">
+                <h6 class="subtitle text-muted">Data de término: {{ evento.dataFim | date: 'dd/MM/yyyy' }}</h6>
+            </div>
+            <div class="col-12  col-xl-3">
+                <h6 class="subtitle text-muted">Hora de término: {{ evento.horaFim }}</h6>
+            </div>
+        </div>
+        <h6 class="subtitle text-muted ">Local: {{ evento.local }} </h6>
+    </div>
+
+    <div class="evento shadow-sm espacoCard">
+        <h4>Descrição do evento:</h4>
+        <p class="text-muted">{{ evento.descricao }}</p>
+        <h4>Ementa:</h4>
+        <p class="text-muted"> {{ evento.ementa }}</p>
+    </div>
+
+    <div class="evento shadow-sm espacoCard">
+
+
+
+        <h4>Inscrições: </h4>
+        <div class="row espaçoTextoCima">
+            <div class="col-12 col-xl-4">
+                <h6 class="subtitle text-muted">Data de início incriçoes:
+                    {{ evento.dataInicioInscricao | date: 'dd/MM/yyyy' }}</h6>
+            </div>
+            <div class="col-12 col-xl-4">
+                <h6 class="subtitle text-muted">Data termino incrições:
+                    {{ evento.dataFimInscricao | date: 'dd/MM/yyyy' }}</h6>
+            </div>
+            <div class="col-12 col-xl-4">
+                <h6 class="subtitle text-muted">Número de vagas: {{ evento.numeroVagas  }}</h6>
+            </div>
+        </div>
+
+        <hr class="sepador">
+
+        <div *ngIf="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Ops!</strong> Este cpf já está cadastrado no evento.
+            <button type="button" class="close" (click)="fecharAlerta()" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+        <form #frm="ngForm" (ngSubmit)="criar(frm)">
+
+            <h5 class="tituloEvento espaçoTextoCima">Formulário de inscrição: </h5>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12 col-xl-6">
+                        <small><label>Nome:</label></small>
+                        <input type="text" name="nome" class="form-control" placeholder="Nome" ngModel>
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        <small><label>Sobrenome:</label></small>
+                        <input type="text" name="sobrenome" class="form-control" placeholder="Sobrenome" ngModel>
+                    </div>
+                </div>
+
+                <div class="row espaçoTextoCima">
+                    <div class="col-12 col-xl-6">
+                        <small><label>CPF:</label></small>
+                        <input type="text" mask="000.000.000-00" name="cpf" class="form-control"
+                            placeholder="999.999.999-99" ngModel>
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        <small><label>E-mail:</label></small>
+                        <input type="email" name="email" class="form-control" placeholder="email@email.com" ngModel>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" botao espaçoBotaoCima">
+                <div class="form-group">
+                    <div class="row justify-content-center">
+
+                        <div class="col-12 col-xl-4">
+                            <div class="espaco">
+                                <button type="submit" class="btn btn-primary  btn-block">Inscrever</button>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-xl-4">
+                            <div class="espaco">
+                                <button type="button" class="btn btn-danger btn-block">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="evento shadow-sm espacoCard">
+
+        <h4 class="espaçoTextoBaixo">Participantes </h4>
+
+        <div class="table-responsive-md">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Sobrenome</th>
+                        <th class="posicaoTabela" scope="col">Situação</th>
+                        <th class="posicaoTabela" scope="col">Certificado</th>
+                        <th class="posicaoTabela" scope="col">QRCode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inscricao of inscricoes">
+                        <th>{{inscricao.id}}</th>
+                        <td>{{inscricao.usuario.nome}}</td>
+                        <td>{{inscricao.usuario.sobrenome}}</td>
+                        <td *ngIf="inscricao.status == 'Aceito'" class="d-flex justify-content-center">
+                            <label class="labelSituacaoAceito">{{inscricao.status}}</label>
+                        </td>
+                        <td *ngIf="inscricao.status == 'Recusado'" class="d-flex justify-content-center">
+                            <label class="labelSituacaoRecusado">{{inscricao.status}}</label>
+                        </td>
+                        <td *ngIf="inscricao.status == 'Processando'">
+                            <div class="row justify-content-center">
+                                <div class="col-sm-5 col-5 col-md-3 col-lg-3 col-xl-2">
+                                    <button type="button" class="btn btn-outline-success btn-sm botaoListaUsuario"
+                                        (click)="alterarStatusAceito(inscricao.usuario.cpf)"><svg width="20px"
+                                            height="20px" viewBox="0 0 16 16" class="bi bi-check" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="col-sm-5 col-5 col-md-3 col-lg-3 col-xl-2">
+                                    <button type="button" class="btn btn-outline-danger btn-sm botaoListaUsuario"
+                                        (click)="alterarStatusRecusado(inscricao.usuario.cpf)"><svg width="20px"
+                                            height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                        </svg></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div  class="d-flex justify-content-center">
+                                <button type="button" class="botaoCertificado pdf iconCor botaoAnimacao"
+                                    (click)="gerarCertificado(inscricao.id)"
+                                    *ngIf="inscricao.status == 'Aceito' && verificarData()"><i
+                                        class="fas fa-file-pdf"></i></button>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div  class="d-flex justify-content-center">
+                                <button type="button" class="botaoCertificado pdf botaoAnimacao"
+                                    (click)="gerarQrcode(inscricao.id)"
+                                    *ngIf="inscricao.status == 'Aceito' && verificarData()"><i
+                                        class="fas fa-qrcode"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

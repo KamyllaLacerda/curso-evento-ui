@@ -1,0 +1,134 @@
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataEvento">
+    <strong>Ops!</strong> A data de término do evento não pode ser menor que a data de início do evento.
+    <button type="button" class="close" (click)="fecharAlertaDataEvento()" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaHoraEvento">
+    <strong>Ops!</strong> A hora de término do evento não pode ser menor ou igual a hora de início do evento.
+    <button type="button" class="close" (click)="fecharAlertaHoraEvento()" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataInscricao">
+    <strong>Ops!</strong> A data de término das inscrições não pode ser menor que a data de início das inscrições.
+    <button type="button" class="close" (click)="fecharAlertaDataInscricao()" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataInscricao1">
+    <strong>Ops!</strong> A data de início das inscrições não pode ser maior que a data de início do evento.
+    <button type="button" class="close" (click)="fecharAlertaDataInscricao1()" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataInscricao2">
+    <strong>Ops!</strong> A data de término das inscrições não pode ser maior que a data de término do evento.
+    <button type="button" class="close" (click)="fecharAlertaDataInscricao2()" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="container">
+    <h1 class="titulo">Cadastro de eventos</h1>
+</div>
+
+<form #frm="ngForm" (ngSubmit)="criar(frm)">
+    <div class="container">
+        <div class="row">
+            <div class="col col-xl">
+                <div class="cadastroEvento shadow-sm">
+
+                    <div class="form-group">
+                        <small><label for="exampleInputEmail1">Título do evento:</label></small>
+                        <input type="text" name="titulo" class="form-control" placeholder="Título do evento" ngModel>
+                    </div>
+
+                    <div class="form-group">
+                        <small><label for="exampleInputEmail1">Local do evento:</label></small>
+                        <input type="text" name="local" class="form-control" placeholder="Local do evento" ngModel>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-xl-3">
+                                <small><label for="exampleInputEmail1">Data de início:</label></small>
+                                <input type="date" name="dataInicio" class="form-control" ngModel>
+                            </div>
+
+                            <div class="col col-xl-3">
+                                <small><label for="exampleInputEmail1">Hora de início:</label></small>
+                                <input type="time" name="horaInicio" class="form-control" ngModel>
+                            </div>
+
+                            <div class="col col-xl-3">
+                                <small><label for="exampleInputEmail1">Data de término:</label></small>
+                                <input type="date" name="dataFim" class="form-control" ngModel>
+                            </div>
+
+                            <div class="col col-xl-3">
+                                <small><label for="exampleInputEmail1">Hora de término:</label></small>
+                                <input type="time" name="horaFim" class="form-control" ngModel>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <small><label for="exampleInputEmail1">Descrição do evento:</label></small>
+                        <textarea class="form-control" rows="5" name="descricao" ngModel></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <small><label for="exampleInputEmail1">Ementa do evento:</label></small>
+                        <textarea class="form-control" rows="3" name="ementa" ngModel></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-12 col-xl-4">
+                                <small><label for="exampleInputEmail1">Número de vagas:</label></small>
+                                <input type="number" name="numeroVagas" class="form-control" placeholder="ex: 10"
+                                    ngModel>
+                            </div>
+
+                            <div class="col-12 col-xl-4">
+                                <small><label for="exampleInputEmail1">Data de início de inscrições:</label></small>
+                                <input type="date" name="dataInicioInscricao" class="form-control" ngModel>
+                            </div>
+
+                            <div class="col-12 col-xl-4">
+                                <small><label for="exampleInputEmail1">Data de término das inscrições:</label></small>
+                                <input type="date" name="dataFimInscricao" class="form-control" ngModel>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" botao ">
+                        <div class="form-group">
+                            <div class="row justify-content-center">
+
+                                <div class="col col-sm-4">
+                                    <div class="espaco">
+                                        <button type="submit"
+                                            class="btn btn-primary btn-lg btn-block">Cadastrar</button>
+                                    </div>
+                                </div>
+
+                                <div class="col col-sm-4">
+                                    <div class="espaco">
+                                        <button type="button" class="btn btn-danger btn-lg btn-block"
+                                            [routerLink]="['']">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

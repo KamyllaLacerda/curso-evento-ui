@@ -1,0 +1,38 @@
+.titulo {
+    font-size: 25px;
+    padding: 10px;
+    color: #000;
+    margin: 0px;
+}
+
+.dataHora {
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+.card {
+    margin-top:25px ;
+}
+
+.textoDescricaoResumido {
+    max-width: 40ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card{
+    height: 15rem;
+}
+
+.botaoAnimacao{
+    transition: transform 1s;
+    transform: translateX(0) scale(0.9);
+}
+
+.botaoAnimacao:hover,
+.botaoAnimacao:focus {
+    transform: translateX(3px) scale(1.1);
+    
+}
+

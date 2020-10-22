@@ -1,0 +1,74 @@
+.espacoCard {
+    margin-top: 20px;
+}
+
+.espaçoTextoCima {
+    padding-top: 5px;
+}
+
+.espaçoTextoBaixo {
+    padding-bottom: 10px;
+}
+
+.espaçoBotaoCima {
+    padding-top: 15px;
+}
+
+.evento {
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    padding: 3%;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.separador {
+    border: 0;
+    border-top: 1px solid;
+}
+
+.espaco {
+    padding: 5px;
+}
+
+.pdf {
+
+    text-align: center;
+    padding-top: 11px;
+}
+
+.posicaoTabela {
+    text-align: center;
+}
+
+.labelSituacaoAceito {
+    text-align: center;
+    color: #43CD80;
+}
+.labelSituacaoRecusado {
+    text-align: center;
+    color: red;
+}
+
+.botaoCertificado {
+    background-color: rgba(46, 42, 42, 0);
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    
+    
+}
+.iconCor{
+color: red;
+}
+
+.botaoAnimacao{
+    transition: transform 1s;
+    transform: translateX(0) scale(1.1);
+}
+
+.botaoAnimacao:hover,
+.botaoAnimacao:focus {
+    transform: translateX(4px) scale(1.5);
+    
+}
