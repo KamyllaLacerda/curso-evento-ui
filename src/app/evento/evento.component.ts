@@ -47,9 +47,9 @@ export class EventoComponent implements OnInit {
     inscricao.status = inscricao.status;
     inscricao.usuario = usuario;
     inscricao.evento = this.evento;
-    if(inscricao.evento.numeroVagas < this.quantidadeUsuario){
+    if (inscricao.evento.numeroVagas < this.quantidadeUsuario) {
       return this.toastr.error('Lamento, este evento não possui mais vagas', 'Ops!');
-   }
+    }
     this.inscricaoService.inscrever(inscricao)
       .subscribe(() => {
         frm.reset();
@@ -63,13 +63,13 @@ export class EventoComponent implements OnInit {
 
     return this.inscricaoService.listarUsuarioNaTabela(this.evento.id).subscribe(inscricoes => {
       this.inscricoes = inscricoes
-   
-     this.inscricoes.forEach(inscricao => { 
-       if(inscricao.status==="Aceito"){
-         this.quantidadeUsuario ++;
-       }
-       
-     });
+
+      this.inscricoes.forEach(inscricao => {
+        if (inscricao.status === "Aceito") {
+          this.quantidadeUsuario++;
+        }
+
+      });
       console.log(this.quantidadeUsuario);
     });
 
@@ -94,13 +94,19 @@ export class EventoComponent implements OnInit {
   }
 
   alterarStatusAceito(cpfUsuario) {
+    let quantidadeDeVagas = JSON.parse(localStorage.getItem("evento")).numeroVagas
+    if (quantidadeDeVagas < this.quantidadeUsuario) {
+      return this.toastr.error('Você não pode aceitar mais inscritos, evento não possui mais vagas.', 'Ops!');
+    }
     this.inscricao.usuario = new Usuario(null, null, null, cpfUsuario);
     this.inscricao.evento = new Evento(JSON.parse(localStorage.getItem("evento")).id)
+
     this.inscricao.status = "Aceito";
     this.inscricaoService.alterarStatusUsuario(this.inscricao).subscribe(() => {
       inscricao => this.inscricao = inscricao;
       window.location.reload();
     }
+
     );
   }
 

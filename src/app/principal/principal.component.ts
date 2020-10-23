@@ -51,6 +51,7 @@ export class PrincipalComponent implements OnInit {
     .subscribe(()=>{
     this.deleteModalRef.hide();
     window.location.reload();
+    this.toastr.success('Evento deletado com sucesso!');
   }, (error) => {this.toastr.error('Este evento possui inscritos e não pode ser deletado', 'Ops!'), this.deleteModalRef.hide()});
 }
 

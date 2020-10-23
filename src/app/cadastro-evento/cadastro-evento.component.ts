@@ -52,6 +52,7 @@ export class CadastroEventoComponent implements OnInit {
           this.eventoService.cadastrar(frm.value)
             .subscribe(() => {
               frm.reset();
+              this.toastr.success('Cadastro do evento realizado com sucesso!');
             });
         }
       }
