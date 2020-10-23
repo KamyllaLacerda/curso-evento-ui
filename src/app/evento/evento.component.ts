@@ -23,6 +23,7 @@ export class EventoComponent implements OnInit {
   dataFimInscricao: Inscricao;
   dataFim;
   quantidadeUsuario: number = 1;
+  dataLimiteInscricao = JSON.parse(localStorage.getItem("evento")).dataFimInscricao;
 
 
   constructor(private inscricaoService: EventoService, private toastr: ToastrService) { }
@@ -42,19 +43,23 @@ export class EventoComponent implements OnInit {
     console.log(frm.value);
     let usuario: Usuario = frm.value;
     let inscricao: Inscricao = new Inscricao();
-
     inscricao.dataHora = inscricao.dataHora;
     inscricao.status = inscricao.status;
     inscricao.usuario = usuario;
     inscricao.evento = this.evento;
+    if (this.dataLimiteInscricao < this.dataAgora) {
+      return this.toastr.error('Lamento, mas data limite para inscrição já passou. ', 'Ops!');
+    }
     if (inscricao.evento.numeroVagas < this.quantidadeUsuario) {
       return this.toastr.error('Lamento, este evento não possui mais vagas', 'Ops!');
     }
+    
+
     this.inscricaoService.inscrever(inscricao)
       .subscribe(() => {
         frm.reset();
         window.location.reload();
-      }, (error) => { this.alert = true })
+      }, (error) => { return this.toastr.error('Este CPF já foi cadastrado.', 'Ops!'); })
 
 
   }

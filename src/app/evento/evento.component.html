@@ -3,23 +3,24 @@
 
 
 
-    <div class="evento shadow-sm espacoCard">
-        <h3>{{ evento.titulo }}</h3>
+    <div class="evento shadow-sm espacoCard ">
+        <h3 class="tituloEvento">{{ evento.titulo }}</h3>
         <div class="row espaçoTextoCima">
             <div class="col-12 col-xl-3">
-                <h6 class="subtitle text-muted">Data de início: {{ evento.dataInicio | date: 'dd/MM/yyyy' }}</h6>
+                <h6 class="subtitle text-muted"><strong>Data de início:</strong> {{ evento.dataInicio | date: 'dd/MM/yyyy' }}</h6>
             </div>
             <div class="col-12  col-xl-3">
-                <h6 class="subtitle text-muted">Hora de início: {{ evento.horaInicio }}</h6>
+                <h6 class="subtitle text-muted"><strong>Data de término:</strong> {{ evento.dataFim | date: 'dd/MM/yyyy' }}</h6>
             </div>
             <div class="col-12  col-xl-3">
-                <h6 class="subtitle text-muted">Data de término: {{ evento.dataFim | date: 'dd/MM/yyyy' }}</h6>
+                <h6 class="subtitle text-muted"><strong>Hora de início:</strong> {{ evento.horaInicio }}</h6>
             </div>
+
             <div class="col-12  col-xl-3">
-                <h6 class="subtitle text-muted">Hora de término: {{ evento.horaFim }}</h6>
+                <h6 class="subtitle text-muted"><strong>Hora de término:</strong> {{ evento.horaFim }}</h6>
             </div>
         </div>
-        <h6 class="subtitle text-muted ">Local: {{ evento.local }} </h6>
+        <h6 class="subtitle text-muted "><strong>Local:</strong> {{ evento.local }} </h6>
     </div>
 
     <div class="evento shadow-sm espacoCard">
@@ -36,27 +37,19 @@
         <h4>Inscrições: </h4>
         <div class="row espaçoTextoCima">
             <div class="col-12 col-xl-4">
-                <h6 class="subtitle text-muted">Data de início incriçoes:
+                <h6 class="subtitle text-muted"><strong> Data início das inscrições:</strong>
                     {{ evento.dataInicioInscricao | date: 'dd/MM/yyyy' }}</h6>
             </div>
-            <div class="col-12 col-xl-4">
-                <h6 class="subtitle text-muted">Data termino incrições:
+            <div class="col-12 col-xl-5">
+                <h6 class="subtitle text-muted"><strong>Data término das inscrições:</strong>
                     {{ evento.dataFimInscricao | date: 'dd/MM/yyyy' }}</h6>
             </div>
-            <div class="col-12 col-xl-4">
-                <h6 class="subtitle text-muted">Número de vagas: {{ evento.numeroVagas  }}</h6>
+            <div class="col-12 col-xl-3">
+                <h6 class="subtitle text-muted"><strong>Número de vagas:</strong> {{ evento.numeroVagas  }}</h6>
             </div>
         </div>
 
         <hr class="sepador">
-
-        <div *ngIf="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Ops!</strong> Este cpf já está cadastrado no evento.
-            <button type="button" class="close" (click)="fecharAlerta()" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
 
         <form #frm="ngForm" (ngSubmit)="criar(frm)">
 
@@ -161,7 +154,7 @@
                             </div>
                         </td>
                         <td>
-                            <div  class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
                                 <button type="button" class="botaoCertificado pdf iconCor botaoAnimacao"
                                     (click)="gerarCertificado(inscricao.id)"
                                     *ngIf="inscricao.status == 'Aceito' && verificarData()"><i
@@ -170,10 +163,9 @@
                         </td>
 
                         <td>
-                            <div  class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
                                 <button type="button" class="botaoCertificado pdf botaoAnimacao"
-                                    (click)="gerarQrcode(inscricao.id)"><i
-                                        class="fas fa-qrcode"></i></button>
+                                    (click)="gerarQrcode(inscricao.id)"><i class="fas fa-qrcode"></i></button>
                             </div>
                         </td>
                     </tr>

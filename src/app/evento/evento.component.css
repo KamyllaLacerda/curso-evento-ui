@@ -72,3 +72,9 @@ color: red;
     transform: translateX(4px) scale(1.5);
     
 }
+
+.tituloEvento{
+    text-align: center;
+    padding-bottom: 10px;
+    color: #007bff;
+}
