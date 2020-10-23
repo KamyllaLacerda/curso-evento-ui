@@ -6,6 +6,7 @@ import { PrincipalService } from './principal.service';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { EventoService } from '../evento/evento.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-principal',
@@ -21,6 +22,7 @@ export class PrincipalComponent implements OnInit {
   constructor(private principalService: PrincipalService,
     private router: Router,
     private modalService: BsModalService,
+    private toastr: ToastrService
   
   ) { }
 
@@ -41,17 +43,21 @@ export class PrincipalComponent implements OnInit {
   onDelete(evento) {
     this.evento = evento;
     this.deleteModalRef = this.modalService.show(this.deleteModel, { class: 'modal-sm' });
+    
   }
 
   onConfirmDelete() {
     this.principalService.removerEvento(this.evento.id)
-    .subscribe();
+    .subscribe(()=>{
     this.deleteModalRef.hide();
     window.location.reload();
-  }
+  }, (error) => {this.toastr.error('Este evento possui inscritos e não pode ser deletado', 'Ops!'), this.deleteModalRef.hide()});
+}
 
   onDeclineDelete(): void {
     this.deleteModalRef.hide();
   }
+
+  
 
 }

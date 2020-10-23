@@ -1,38 +1,3 @@
-<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataEvento">
-    <strong>Ops!</strong> A data de término do evento não pode ser menor que a data de início do evento.
-    <button type="button" class="close" (click)="fecharAlertaDataEvento()" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaHoraEvento">
-    <strong>Ops!</strong> A hora de término do evento não pode ser menor ou igual a hora de início do evento.
-    <button type="button" class="close" (click)="fecharAlertaHoraEvento()" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataInscricao">
-    <strong>Ops!</strong> A data de término das inscrições não pode ser menor que a data de início das inscrições.
-    <button type="button" class="close" (click)="fecharAlertaDataInscricao()" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataInscricao1">
-    <strong>Ops!</strong> A data de início das inscrições não pode ser maior que a data de início do evento.
-    <button type="button" class="close" (click)="fecharAlertaDataInscricao1()" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="alertaDataInscricao2">
-    <strong>Ops!</strong> A data de término das inscrições não pode ser maior que a data de término do evento.
-    <button type="button" class="close" (click)="fecharAlertaDataInscricao2()" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
 <div class="container">
     <h1 class="titulo">Cadastro de eventos</h1>
 </div>

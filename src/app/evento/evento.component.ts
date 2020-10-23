@@ -5,6 +5,8 @@ import { Inscricao } from '../model/inscricao.model';
 import { Usuario } from '../model/usuario.model';
 import { EventoService } from './evento.service';
 import * as moment from 'moment'
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -14,15 +16,16 @@ import * as moment from 'moment'
 })
 export class EventoComponent implements OnInit {
   alert: Boolean = false;
-  inscricoes = [];
+  inscricoes: Array<Inscricao> = [];
   evento: Evento;
   inscricao: Inscricao = new Inscricao();
   dataAgora;
   dataFimInscricao: Inscricao;
   dataFim;
+  quantidadeUsuario: number = 1;
 
 
-  constructor(private inscricaoService: EventoService) { }
+  constructor(private inscricaoService: EventoService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.carregarDados();
@@ -44,7 +47,9 @@ export class EventoComponent implements OnInit {
     inscricao.status = inscricao.status;
     inscricao.usuario = usuario;
     inscricao.evento = this.evento;
-
+    if(inscricao.evento.numeroVagas < this.quantidadeUsuario){
+      return this.toastr.error('Lamento, este evento não possui mais', 'Ops!');
+   }
     this.inscricaoService.inscrever(inscricao)
       .subscribe(() => {
         frm.reset();
@@ -55,7 +60,19 @@ export class EventoComponent implements OnInit {
   }
 
   mostrarUsuario() {
-    return this.inscricaoService.listarUsuarioNaTabela(this.evento.id).subscribe(inscricoes => this.inscricoes = inscricoes);
+
+    return this.inscricaoService.listarUsuarioNaTabela(this.evento.id).subscribe(inscricoes => {
+      this.inscricoes = inscricoes
+   
+     this.inscricoes.forEach(inscricao => { 
+       if(inscricao.status==="Aceito"){
+         this.quantidadeUsuario ++;
+       }
+       
+     });
+      console.log(this.quantidadeUsuario);
+    });
+
   }
 
   gerarCertificado(id) {

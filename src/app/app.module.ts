@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +16,7 @@ import { EventoComponent } from './evento/evento.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -35,7 +38,9 @@ const maskConfig: Partial<IConfig> = {
     FormsModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    NgxMaskModule.forRoot(maskConfig)
+    NgxMaskModule.forRoot(maskConfig),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     PrincipalService,

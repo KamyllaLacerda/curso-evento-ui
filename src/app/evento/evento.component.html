@@ -127,8 +127,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let inscricao of inscricoes">
-                        <th>{{inscricao.id}}</th>
+                    <tr *ngFor="let inscricao of inscricoes let i = index">
+                        <th>{{i+1}}</th>
                         <td>{{inscricao.usuario.nome}}</td>
                         <td>{{inscricao.usuario.sobrenome}}</td>
                         <td *ngIf="inscricao.status == 'Aceito'" class="d-flex justify-content-center">
@@ -172,8 +172,7 @@
                         <td>
                             <div  class="d-flex justify-content-center">
                                 <button type="button" class="botaoCertificado pdf botaoAnimacao"
-                                    (click)="gerarQrcode(inscricao.id)"
-                                    *ngIf="inscricao.status == 'Aceito' && verificarData()"><i
+                                    (click)="gerarQrcode(inscricao.id)"><i
                                         class="fas fa-qrcode"></i></button>
                             </div>
                         </td>

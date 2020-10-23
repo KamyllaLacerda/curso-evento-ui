@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscriber } from 'rxjs';
-import { Evento } from '../model/evento.model';
+import { ToastrService } from 'ngx-toastr';
 import { CadastroEventoService } from './cadastro-evento.service';
 
 
@@ -11,13 +10,13 @@ import { CadastroEventoService } from './cadastro-evento.service';
   styleUrls: ['./cadastro-evento.component.css']
 })
 export class CadastroEventoComponent implements OnInit {
-  alertaDataEvento: Boolean = false;
-  alertaHoraEvento: Boolean = false;
-  alertaDataInscricao: Boolean = false;
-  alertaDataInscricao1: Boolean = false;
-  alertaDataInscricao2: Boolean = false;
+  alert1 = false;
+  alert2 = false;
+  alert3 = false;
+  alert4 = false;
+  alert5 = false;
 
-  constructor(private eventoService: CadastroEventoService) { }
+  constructor(private eventoService: CadastroEventoService, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -31,52 +30,32 @@ export class CadastroEventoComponent implements OnInit {
     let dataInicioInscricao = frm.value.dataInicioInscricao;
     let dataFimInscricao = frm.value.dataFimInscricao;
 
-    if (dataFim < dataInicio) {
-      this.alertaDataEvento = true;
-    }
-    if (dataInicio == dataFim) {
-      if (horaFim <= horaInicio) {
-        this.alertaHoraEvento = true;
-      }
-    } else
-      if (dataFimInscricao < dataInicioInscricao) {
-        this.alertaDataInscricao = true;
-      }
-    if (dataInicioInscricao > dataInicio) {
-      this.alertaDataInscricao1 = true;
-    }
-    if (dataFimInscricao > dataFim) {
-      this.alertaDataInscricao2 = true;
-    }
+    
+    if (dataInicio == dataFim && horaFim <= horaInicio)
+      this.toastr.error('Hora de término do evento menor ou igual a hora de início do evento.', 'Ops!');
 
-    else if (this.alertaDataEvento == false && this.alertaHoraEvento == false &&
-      this.alertaDataInscricao == false && this.alertaDataInscricao1 == false && this.alertaDataInscricao2 == false) {
+    else if (dataFim < dataInicio)
+      this.toastr.error('Data de término do evento menor que a data de início.', 'Ops!');
+
+    else if (dataFimInscricao < dataInicioInscricao) 
+      this.toastr.error('Data de término das inscrições menor que a data de início das inscrições.', 'Ops!');
+
+   else if (dataInicioInscricao > dataInicio) 
+      this.toastr.error('Data de início das inscrições maior que a data de início do evento.', 'Ops!');
+
+    else if (dataFimInscricao > dataFim) 
+      this.toastr.error('Data de término das inscrições maior que a data de término do evento.', 'Ops!');
+      
+    else {
       {
-        this.eventoService.cadastrar(frm.value)
-          .subscribe(() => {
-            frm.reset();
-          });
+        {
+          this.eventoService.cadastrar(frm.value)
+            .subscribe(() => {
+              frm.reset();
+            });
+        }
       }
     }
-  }
-
-  fecharAlertaDataEvento() {
-    this.alertaDataEvento = false;
-  }
-
-  fecharAlertaHoraEvento() {
-    this.alertaHoraEvento = false;
-  }
-
-  fecharAlertaDataInscricao() {
-    this.alertaDataInscricao = false;
-  }
-
-  fecharAlertaDataInscricao1() {
-    this.alertaDataInscricao1 = false;
-  }
-
-  fecharAlertaDataInscricao2() {
-    this.alertaDataInscricao2 = false;
   }
 }
+
