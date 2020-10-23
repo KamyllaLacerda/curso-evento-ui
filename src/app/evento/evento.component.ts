@@ -48,7 +48,7 @@ export class EventoComponent implements OnInit {
     inscricao.usuario = usuario;
     inscricao.evento = this.evento;
     if(inscricao.evento.numeroVagas < this.quantidadeUsuario){
-      return this.toastr.error('Lamento, este evento não possui mais', 'Ops!');
+      return this.toastr.error('Lamento, este evento não possui mais vagas', 'Ops!');
    }
     this.inscricaoService.inscrever(inscricao)
       .subscribe(() => {
