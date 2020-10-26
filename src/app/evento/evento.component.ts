@@ -53,7 +53,7 @@ export class EventoComponent implements OnInit {
     if (inscricao.evento.numeroVagas < this.quantidadeUsuario) {
       return this.toastr.error('Lamento, este evento não possui mais vagas', 'Ops!');
     }
-    
+
 
     this.inscricaoService.inscrever(inscricao)
       .subscribe(() => {
@@ -128,6 +128,10 @@ export class EventoComponent implements OnInit {
 
   fecharAlerta() {
     this.alert = false;
+  }
+
+  resetarFormInscricao(frm: FormControl) {
+    frm.reset();
   }
 
 
