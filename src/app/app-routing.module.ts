@@ -5,9 +5,10 @@ import { EventoComponent } from './evento/evento.component';
 import { PrincipalComponent } from './principal/principal.component';
 
 const routes: Routes = [
-  { path: '', component: PrincipalComponent },
+  { path: 'home', component: PrincipalComponent },
   { path: 'cadastrarEvento', component: CadastroEventoComponent },
   { path: 'evento', component: EventoComponent },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

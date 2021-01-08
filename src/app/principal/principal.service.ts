@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Evento } from '../model/evento.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class PrincipalService {
 
-  eventoUrl = 'http://localhost:8080/evento'
+  eventoUrl = `${environment.url}/evento`
   evento: Evento
 
   constructor(private http: HttpClient) { }

@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: 'https://servicos.corenmg.gov.br/corenmg-servicos-evento',
+  servicoSiaUrl: 'https://servicosteste.corenmg.gov.br/sia',
+  frontSiaUrl: 'https://siateste.corenmg.gov.br/'
 };
 
 /*

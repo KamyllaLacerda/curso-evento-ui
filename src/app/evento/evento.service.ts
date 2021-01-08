@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Inscricao } from '../model/inscricao.model';
+import { environment } from  '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventoService {
 
-  inscricaoUrl = 'http://localhost:8080/inscricao';
-  usuariosUrl = 'http://localhost:8080/usuario';
-  usuarioEvento = 'http://localhost:8080/inscricao/usuario/';
-  inscricaoEvento = 'http://localhost:8080/evento/inscricao';
+  inscricaoUrl = `${environment.url}/inscricao`;
+  usuariosUrl = `${environment.url}/usuario`;
+  usuarioEvento = `${environment.url}/inscricao/usuario/`;
+  inscricaoEvento = `${environment.url}/evento/inscricao`;
   
 
   constructor(private http: HttpClient) { }
